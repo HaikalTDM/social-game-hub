@@ -19,6 +19,7 @@ import WerewolfScreen from './screens/WerewolfScreen';
 
 // Components
 import SettingsModal from './components/SettingsModal';
+import AdModal from './components/AdModal';
 
 export default function App() {
   const [activeGame, setActiveGame] = useState(null); // 'impostor', 'mlt', 'ticktock', 'forbidden', 'werewolf'
@@ -29,6 +30,10 @@ export default function App() {
   const [settings, setSettings] = useState({
     vibration: true
   });
+
+  // Ad State
+  const [showAd, setShowAd] = useState(false);
+  const [gamesPlayed, setGamesPlayed] = useState(0);
 
   // Impostor State
   const [players, setPlayers] = useState(['Player 1', 'Player 2', 'Player 3']);
@@ -80,11 +85,24 @@ export default function App() {
 
   const goHome = () => {
     clearAllTimers();
+
+    // Increment game count if we are coming from an active game (not just setup)
+    if (activeGame && currentScreen !== 'setup') {
+      const newCount = gamesPlayed + 1;
+      setGamesPlayed(newCount);
+
+      // Show ad every 3 games
+      if (newCount > 0 && newCount % 3 === 0) {
+        setShowAd(true);
+      }
+    }
+
     setActiveGame(null);
     setCurrentScreen('hub');
   };
 
   const openSettings = () => setShowSettings(true);
+  const closeAd = () => setShowAd(false);
 
   const clearAllTimers = () => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -362,7 +380,13 @@ export default function App() {
           settings={settings}
           setSettings={setSettings}
         />
+
+        <AdModal
+          isOpen={showAd}
+          onClose={closeAd}
+        />
       </main>
     </div>
   );
 }
+
