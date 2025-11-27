@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, HelpCircle, Ban, Timer, ThumbsDown, ThumbsUp, Trophy, RefreshCcw } from 'lucide-react';
+import { X, HelpCircle, Ban, Timer, ThumbsDown, ThumbsUp, Trophy, RefreshCcw, Zap } from 'lucide-react';
 import Button from '../components/Button';
 import Badge from '../components/Badge';
 
