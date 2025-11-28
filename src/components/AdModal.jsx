@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ExternalLink } from 'lucide-react';
+import { X, Zap, Star, Shield } from 'lucide-react';
 import Button from './Button';
 
 const AdModal = ({ isOpen, onClose }) => {
@@ -27,49 +27,62 @@ const AdModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/90 backdrop-blur-md animate-in fade-in duration-300">
-            <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-300">
+        <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4 bg-black/95 backdrop-blur-md animate-in fade-in duration-300">
+            <div className="w-full max-w-sm bg-slate-900 rounded-3xl overflow-hidden shadow-2xl relative animate-in zoom-in-95 duration-300 border border-slate-800">
 
-                {/* Ad Header */}
-                <div className="bg-slate-100 p-3 flex justify-between items-center border-b border-slate-200">
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-200 px-2 py-1 rounded">Advertisement</span>
+                {/* Header */}
+                <div className="bg-slate-900 p-4 flex justify-between items-center">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest border border-slate-700 px-2 py-0.5 rounded">Sponsored</span>
                     {canClose ? (
-                        <button onClick={onClose} className="p-1 bg-slate-200 rounded-full text-slate-500 hover:bg-slate-300 transition-colors">
+                        <button onClick={onClose} className="p-1 bg-slate-800 rounded-full text-slate-400 hover:text-white transition-colors">
                             <X size={20} />
                         </button>
                     ) : (
-                        <span className="text-xs font-bold text-slate-400">Skip in {timer}s</span>
+                        <span className="text-xs font-bold text-slate-500">Skip in {timer}s</span>
                     )}
                 </div>
 
-                {/* Ad Content Placeholder */}
-                <div className="h-64 bg-slate-50 flex flex-col items-center justify-center p-8 text-center relative overflow-hidden group">
-                    <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] opacity-50" />
+                {/* Ad Content */}
+                <div className="p-6 pt-0 flex flex-col items-center text-center relative">
 
-                    <div className="z-10 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 transform transition-transform group-hover:scale-105 duration-500">
-                        <div className="w-16 h-16 bg-blue-500 rounded-xl mx-auto mb-4 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-blue-500/30">
-                            Ad
-                        </div>
-                        <h3 className="text-xl font-bold text-slate-800 mb-2">AdSense Active</h3>
-                        <p className="text-slate-500 text-sm mb-4">
-                            The global AdSense script is loaded. <br />
-                            To show a specific ad here, you need to create an <strong>Ad Unit</strong> in Google AdSense and paste the <code>&lt;ins&gt;</code> code in this component.
-                        </p>
-                        <button className="px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg shadow-md hover:bg-blue-700 transition-colors flex items-center gap-2 mx-auto">
-                            Visit Site <ExternalLink size={14} />
-                        </button>
+                    {/* Visual */}
+                    <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-600 rounded-2xl mb-6 flex items-center justify-center shadow-lg shadow-orange-500/20 rotate-3">
+                        <Zap size={40} className="text-white" fill="currentColor" />
                     </div>
+
+                    <h3 className="text-2xl font-black text-white mb-2">Unlock Pro Mode</h3>
+                    <p className="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Get the ultimate party experience. No ads, exclusive games, and custom themes.
+                    </p>
+
+                    {/* Features */}
+                    <div className="w-full space-y-3 mb-8">
+                        <div className="flex items-center gap-3 text-sm text-slate-300 bg-slate-800/50 p-3 rounded-xl border border-slate-800">
+                            <Shield size={16} className="text-emerald-400" />
+                            <span>Ad-free experience</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-sm text-slate-300 bg-slate-800/50 p-3 rounded-xl border border-slate-800">
+                            <Star size={16} className="text-amber-400" />
+                            <span>Exclusive "Spicy" packs</span>
+                        </div>
+                    </div>
+
+                    {/* CTA */}
+                    <button className="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white font-bold rounded-xl shadow-lg hover:shadow-orange-500/25 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        Get Pro for $4.99
+                    </button>
+                    <p className="text-[10px] text-slate-600 mt-3">One-time purchase. Restore anytime.</p>
                 </div>
 
                 {/* Footer Action */}
-                <div className="p-4 bg-white border-t border-slate-100">
+                <div className="p-4 bg-slate-950 border-t border-slate-900">
                     <Button
                         onClick={onClose}
-                        variant="primary"
-                        className={`w-full ${!canClose ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        variant="ghost"
+                        className={`w-full ${!canClose ? 'opacity-50 cursor-not-allowed' : 'text-slate-400 hover:text-white'}`}
                         disabled={!canClose}
                     >
-                        {canClose ? 'Continue to App' : `Wait ${timer} seconds...`}
+                        {canClose ? 'No thanks, continue to game' : `Reward in ${timer}...`}
                     </Button>
                 </div>
 

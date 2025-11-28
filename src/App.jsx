@@ -16,13 +16,15 @@ import MLTGameScreen from './screens/MLTGameScreen';
 import TickTockScreen from './screens/TickTockScreen';
 import ForbiddenScreen from './screens/ForbiddenScreen';
 import WerewolfScreen from './screens/WerewolfScreen';
+import SpinBottleScreen from './screens/SpinBottleScreen';
+import NeverHaveIEverScreen from './screens/NeverHaveIEverScreen';
+import KingsCupScreen from './screens/KingsCupScreen';
 
 // Components
 import SettingsModal from './components/SettingsModal';
-import AdModal from './components/AdModal';
 
 export default function App() {
-  const [activeGame, setActiveGame] = useState(null); // 'impostor', 'mlt', 'ticktock', 'forbidden', 'werewolf'
+  const [activeGame, setActiveGame] = useState(null); // 'impostor', 'mlt', 'ticktock', 'forbidden', 'werewolf', 'spinbottle', 'nhie', 'kingscup'
   const [currentScreen, setCurrentScreen] = useState('hub');
 
   // Settings State
@@ -30,10 +32,6 @@ export default function App() {
   const [settings, setSettings] = useState({
     vibration: true
   });
-
-  // Ad State
-  const [showAd, setShowAd] = useState(false);
-  const [gamesPlayed, setGamesPlayed] = useState(0);
 
   // Impostor State
   const [players, setPlayers] = useState(['Player 1', 'Player 2', 'Player 3']);
@@ -85,24 +83,11 @@ export default function App() {
 
   const goHome = () => {
     clearAllTimers();
-
-    // Increment game count if we are coming from an active game (not just setup)
-    if (activeGame && currentScreen !== 'setup') {
-      const newCount = gamesPlayed + 1;
-      setGamesPlayed(newCount);
-
-      // Show ad every 3 games
-      if (newCount > 0 && newCount % 3 === 0) {
-        setShowAd(true);
-      }
-    }
-
     setActiveGame(null);
     setCurrentScreen('hub');
   };
 
   const openSettings = () => setShowSettings(true);
-  const closeAd = () => setShowAd(false);
 
   const clearAllTimers = () => {
     if (timerRef.current) clearInterval(timerRef.current);
@@ -203,6 +188,15 @@ export default function App() {
     setCurrentScreen('werewolf_game');
   };
 
+  // Spin Bottle
+  const startSpinBottle = () => { setActiveGame('spinbottle'); setCurrentScreen('spinbottle_game'); };
+
+  // Never Have I Ever
+  const startNeverHaveIEver = () => { setActiveGame('nhie'); setCurrentScreen('nhie_game'); };
+
+  // King's Cup
+  const startKingsCup = () => { setActiveGame('kingscup'); setCurrentScreen('kingscup_game'); };
+
   // Cleanup
   useEffect(() => { return () => clearAllTimers(); }, []);
 
@@ -257,6 +251,9 @@ export default function App() {
             startTickTock={startTickTock}
             startForbidden={startForbidden}
             startWerewolf={startWerewolf}
+            startSpinBottle={startSpinBottle}
+            startNeverHaveIEver={startNeverHaveIEver}
+            startKingsCup={startKingsCup}
             openSettings={openSettings}
           />
         )}
@@ -373,6 +370,21 @@ export default function App() {
           />
         )}
 
+        {/* Spin Bottle Routes */}
+        {currentScreen === 'spinbottle_game' && (
+          <SpinBottleScreen goHome={goHome} />
+        )}
+
+        {/* Never Have I Ever Routes */}
+        {currentScreen === 'nhie_game' && (
+          <NeverHaveIEverScreen goHome={goHome} />
+        )}
+
+        {/* King's Cup Routes */}
+        {currentScreen === 'kingscup_game' && (
+          <KingsCupScreen goHome={goHome} />
+        )}
+
         {/* Global Modals */}
         <SettingsModal
           isOpen={showSettings}
@@ -380,13 +392,7 @@ export default function App() {
           settings={settings}
           setSettings={setSettings}
         />
-
-        <AdModal
-          isOpen={showAd}
-          onClose={closeAd}
-        />
       </main>
     </div>
   );
 }
-

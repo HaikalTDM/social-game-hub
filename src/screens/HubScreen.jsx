@@ -9,6 +9,9 @@ const HubScreen = ({
     startTickTock,
     startForbidden,
     startWerewolf,
+    startSpinBottle,
+    startNeverHaveIEver,
+    startKingsCup,
     openSettings
 }) => {
     return (
@@ -91,6 +94,42 @@ const HubScreen = ({
                         <h3 className="text-3xl font-bold text-white mb-1">Werewolf</h3>
                         <p className="text-slate-400 text-sm mb-4 line-clamp-2">Pass the phone. Survive the night. Find the beast.</p>
                         <Button variant="wolf" icon={Play}>Play Now</Button>
+                    </div>
+                </div>
+
+                {/* GAME 6: SPIN THE BOTTLE */}
+                <div onClick={startSpinBottle} className="group relative h-64 w-full bg-slate-800 rounded-3xl overflow-hidden cursor-pointer border border-slate-700 active:scale-[0.98] transition-all shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-slate-900/60 to-transparent z-10" />
+                    <div className="absolute inset-0 opacity-30"><div className="absolute top-4 right-4 text-[8rem]">🍾</div></div>
+                    <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                        <div className="flex items-center gap-2 mb-2"><Badge variant="accent">Party</Badge><Badge>2+ Players</Badge></div>
+                        <h3 className="text-3xl font-bold text-white mb-1">Spin the Bottle</h3>
+                        <p className="text-slate-400 text-sm mb-4 line-clamp-2">Spin the bottle and face the truth or dare!</p>
+                        <Button variant="primary" icon={Play}>Play Now</Button>
+                    </div>
+                </div>
+
+                {/* GAME 7: NEVER HAVE I EVER */}
+                <div onClick={startNeverHaveIEver} className="group relative h-64 w-full bg-slate-800 rounded-3xl overflow-hidden cursor-pointer border border-slate-700 active:scale-[0.98] transition-all shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-indigo-950 via-slate-900/60 to-transparent z-10" />
+                    <div className="absolute inset-0 opacity-30"><div className="absolute top-4 right-4 text-[8rem]">🍺</div></div>
+                    <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                        <div className="flex items-center gap-2 mb-2"><Badge variant="mlt">Icebreaker</Badge><Badge>2+ Players</Badge></div>
+                        <h3 className="text-3xl font-bold text-white mb-1">Never Have I Ever</h3>
+                        <p className="text-slate-400 text-sm mb-4 line-clamp-2">Swipe cards. Reveal secrets. Drink if you've done it!</p>
+                        <Button variant="primary" icon={Play}>Play Now</Button>
+                    </div>
+                </div>
+
+                {/* GAME 8: KING'S CUP */}
+                <div onClick={startKingsCup} className="group relative h-64 w-full bg-slate-800 rounded-3xl overflow-hidden cursor-pointer border border-slate-700 active:scale-[0.98] transition-all shadow-lg">
+                    <div className="absolute inset-0 bg-gradient-to-t from-amber-950 via-slate-900/60 to-transparent z-10" />
+                    <div className="absolute inset-0 opacity-30"><div className="absolute top-4 right-4 text-[8rem]">👑</div></div>
+                    <div className="absolute bottom-0 left-0 w-full p-6 z-20">
+                        <div className="flex items-center gap-2 mb-2"><Badge variant="bomb">Classic</Badge><Badge>3+ Players</Badge></div>
+                        <h3 className="text-3xl font-bold text-white mb-1">King's Cup</h3>
+                        <p className="text-slate-400 text-sm mb-4 line-clamp-2">The ultimate drinking game. Don't draw the 4th King!</p>
+                        <Button variant="bomb" icon={Play}>Play Now</Button>
                     </div>
                 </div>
 
